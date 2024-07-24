@@ -83,7 +83,10 @@ export default function IndexThree() {
                 </p>
 
                 <div className="mt-4">
-                  <Link href="/" className="btn btn-pills bg-[#CA8E25] hover:bg-white">
+                  <Link
+                    href="/"
+                    className="btn btn-pills bg-[#CA8E25] hover:bg-white"
+                  >
                     Read More
                     <i className="mdi mdi-arrow-right align-middle"></i>
                   </Link>
