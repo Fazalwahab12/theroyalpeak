@@ -99,7 +99,7 @@ export default function IndexThree() {
         <div className="container mt-100 mt-60">
           <AboutUs />
         </div>
-        {/* 
+
         <div className="container mt-100 mt-60">
           <FeaturedProperties />
         </div>
@@ -126,9 +126,9 @@ export default function IndexThree() {
 
         <div className="container mt-100 mt-60">
           <GetInTuch />
-        </div> */}
+        </div>
       </section>
-      {/* <Footer /> */}
+      <Footer />
       {/* <ScrollTop /> */}
     </>
   );
