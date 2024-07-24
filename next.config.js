@@ -1,29 +1,22 @@
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-});
-
-module.exports = withBundleAnalyzer({
-  webpack: (config, { isServer }) => {
-    // Optimize Webpack configuration
-    if (!isServer) {
-      config.optimization.splitChunks = {
-        chunks: "all",
-        minSize: 0,
-        maxInitialRequests: Infinity,
-        automaticNameDelimiter: ".",
-        name: "chunk",
-      };
-    }
-
-    // Use caching
-    config.cache = {
-      type: "filesystem",
-      buildDependencies: {
-        config: [__filename],
-      },
-    };
-
+/** @type {import('next').NextConfig} */
+const path = require("path");
+const nextConfig = {
+  reactStrictMode: false,
+  sassOptions: {
+    includePaths: [path.join(__dirname, "styles")],
+  },
+  webpack(config) {
+    config.module.rules.forEach((rule) => {
+      const { oneOf } = rule;
+      if (oneOf) {
+        oneOf.forEach((one) => {
+          if (!`${one.issuer?.and}`.includes("_app")) return;
+          one.issuer.and = [path.resolve(__dirname)];
+        });
+      }
+    });
     return config;
   },
-  // Add other configurations if needed
-});
+};
+
+module.exports = nextConfig;
